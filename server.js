@@ -1,6 +1,7 @@
+require('dotenv').config()
 const express = require("express");
 const app = express();
-const port = 3000;
+const port = process.env.PORT
 
 const plants = [
   "Monstera Deliciosa",
@@ -28,6 +29,12 @@ app.get("/:indexOfPlantsArray", (req, res) => {
 app.get('/hello/:firstname/:lastname', (req, res) => {
   res.send(`Hello ${req.params.firstname} ${req.params.lastname}`)
 })
+ 
+app.get("/howdy/:firstName", function (req, res) {
+  console.log(req.params);
+  console.log(req.query);
+  res.send("howdy " + req.query.title + " " + req.params.firstName);
+});
 
 app.listen(port, () => {
   console.log("listening on port", port);
